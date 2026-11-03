@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grade 3 Singular and Plural Quiz</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fff8e7;--card:#ffffff;--text:#2b2d42;--muted:#6b6f85;--accent:#4361ee;--accent-text:#ffffff;--border:#d9dcea;--good:#1b9e5a;--good-bg:#e2f6ea;--bad:#d62839;--bad-bg:#fde4e7;--sel:#e8ecff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171a2b;--card:#222640;--text:#f1f2f8;--muted:#a3a8c4;--accent:#7b93ff;--accent-text:#10142b;--border:#3a4068;--good:#4cd48a;--good-bg:#17382a;--bad:#ff6b7a;--bad-bg:#40202a;--sel:#2c3566}}
+:root[data-theme="dark"]{--bg:#171a2b;--card:#222640;--text:#f1f2f8;--muted:#a3a8c4;--accent:#7b93ff;--accent-text:#10142b;--border:#3a4068;--good:#4cd48a;--good-bg:#17382a;--bad:#ff6b7a;--bad-bg:#40202a;--sel:#2c3566}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Comic Sans MS","Trebuchet MS",system-ui,sans-serif;line-height:1.4}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:8px 0 4px;text-align:center}
+.sub{text-align:center;color:var(--muted);margin:0 0 14px}
+.bar{height:10px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:6px}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.count{color:var(--muted);font-size:.9rem;margin-bottom:10px}
+.card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:18px}
+.q{font-size:1.2rem;font-weight:700;margin:0 0 6px}
+.hint{color:var(--muted);font-size:.9rem;margin:0 0 12px}
+.opt{display:flex;gap:10px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;background:var(--card);border:2px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;cursor:pointer;min-height:48px}
+.opt:hover{border-color:var(--accent)}
+.opt.sel{background:var(--sel);border-color:var(--accent)}
+.opt.good{background:var(--good-bg);border-color:var(--good)}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.l{font-weight:700;min-width:1.6em;height:1.6em;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--border)}
+.btn{font:inherit;font-weight:700;background:var(--accent);color:var(--accent-text);border:0;border-radius:12px;padding:12px 22px;margin-top:12px;cursor:pointer;min-height:48px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.fb{margin-top:12px;font-weight:700;padding:10px 12px;border-radius:10px}
+.fb.good{background:var(--good-bg);color:var(--good)}
+.fb.bad{background:var(--bad-bg);color:var(--bad)}
+.big{font-size:3rem;text-align:center;margin:0}
+.score{text-align:center;font-size:1.6rem;font-weight:700;margin:4px 0}
+.rev{margin:10px 0;padding:10px;border-radius:10px;background:var(--bg);font-size:.95rem}
+.rev b{display:block}
+</style>
+</head>
+<body>
+<main>
+<h1>Singular and Plural Quiz</h1>
+<p class="sub">Grade 3 · 20 questions</p>
+<div id="app"></div>
+</main>
+<script>
+var Q=[
+["What is the plural of leaf?",["Leaves","Leafs","Leavs","Leafes"],[0]],
+["What is the plural of knife?",["Knifees","Knives","Knifes","Knivies"],[1]],
+["Choose the correct plural of city.",["Citis","Cities","Cityes","Citys"],[1]],
+["What is the plural of potato?",["Potatoes","Potatoies","Potato’s","Potatos"],[0]],
+["What is the plural of child?",["Childes","Childrens","Children","Childs"],[2]],
+["Five (mouse / mice) ran away. Choose the correct word.",["Mouse","Mouses","Mice","Mices"],[2]],
+["One woman, three ______.",["Womans","Womens","Womanes","Women"],[3]],
+["Rewrite in plural: The fox is in the garden.",["The foxes is in the garden.","The foxes are in the garden.","The foxs are in the garden.","The fox are in the garden."],[1]],
+["The plural of sheep is sheeps.",["True","False"],[1],"tf"],
+["Select ALL the correctly written plural nouns.",["Deers","Wolfs","Teeth","Geese"],[2,3],"multi"],
+["What is the plural of hero?",["Hero’s","Heroies","Heroes","Heros"],[2]],
+["Choose the correct plural of baby.",["Babys","Babyeses","Babies","Babyes"],[2]],
+["One goose, four ______.",["Goosies","Gooses","Geese","Goos"],[2]],
+["Which sentence is correct?",["The child are playing.","The childrens is playing.","The childrens are playing.","The children are playing."],[3]],
+["The plural of tooth is teeth.",["True","False"],[0],"tf"],
+["What is the plural of class?",["Classies","Classs","Class","Classes"],[3]],
+["Rewrite in plural: The baby is crying.",["The baby are crying.","The babys are crying.","The babies is crying.","The babies are crying."],[3]],
+["One man, two ______.",["Mans","Men","Manes","Manses"],[1]],
+["Select ALL the nouns that have the same singular and plural forms.",["Deer","Mouse","Sheep","Child"],[0,2],"multi"],
+["Choose the correct plural form of person.",["People","Persones","Persons","Peoples"],[0]]
+];
+var app=document.getElementById("app"),i=0,sel=[],score=0,log=[],done=false;
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.textContent=h;return e}
+function same(a,b){return a.length===b.length&&a.every(function(x){return b.indexOf(x)>-1})}
+function show(){
+ app.innerHTML="";sel=[];done=false;
+ var q=Q[i],multi=q[3]==="multi";
+ var bar=el("div","bar"),fill=el("i");fill.style.width=(i/Q.length*100)+"%";bar.appendChild(fill);app.appendChild(bar);
+ app.appendChild(el("div","count","Question "+(i+1)+" of "+Q.length));
+ var card=el("div","card");app.appendChild(card);
+ card.appendChild(el("p","q",q[0]));
+ card.appendChild(el("p","hint",multi?"Pick ALL the right answers.":(q[3]==="tf"?"True or false?":"Pick one answer.")));
+ var btns=[];
+ q[1].forEach(function(t,k){
+  var b=el("button","opt");b.type="button";
+  if(q[3]!=="tf")b.appendChild(el("span","l","ABCD"[k]));
+  b.appendChild(el("span","",t));
+  b.onclick=function(){
+   if(done)return;
+   if(multi){var p=sel.indexOf(k);if(p>-1){sel.splice(p,1);b.classList.remove("sel")}else{sel.push(k);b.classList.add("sel")}}
+   else{sel=[k];btns.forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")}
+   go.disabled=sel.length===0;
+  };
+  btns.push(b);card.appendChild(b);
+ });
+ var fb=el("div");card.appendChild(fb);
+ var go=el("button","btn","Check answer");go.type="button";go.disabled=true;card.appendChild(go);
+ go.onclick=function(){
+  if(!done){
+   done=true;var ok=same(sel,q[2]);if(ok)score++;
+   log.push({q:q[0],ok:ok,mine:sel.slice(),right:q[2],opts:q[1]});
+   btns.forEach(function(b,k){b.disabled=true;b.classList.remove("sel");
+    if(q[2].indexOf(k)>-1)b.classList.add("good");else if(sel.indexOf(k)>-1)b.classList.add("bad")});
+   fb.className="fb "+(ok?"good":"bad");
+   fb.textContent=ok?"Correct! Great job!":"Not quite. The right answer is shown in green.";
+   go.textContent=i<Q.length-1?"Next question":"See my score";
+  }else{i++;if(i<Q.length)show();else finish()}
+ };
+}
+function finish(){
+ app.innerHTML="";
+ var card=el("div","card");app.appendChild(card);
+ var pct=Math.round(score/Q.length*100);
+ card.appendChild(el("p","big",pct>=80?"🌟":pct>=50?"👍":"💪"));
+ card.appendChild(el("p","score",score+" out of "+Q.length));
+ card.appendChild(el("p","sub",pct>=80?"Amazing work!":pct>=50?"Good effort! Try again to improve.":"Keep practicing. You can do it!"));
+ var wrong=log.filter(function(x){return !x.ok});
+ if(wrong.length){
+  card.appendChild(el("p","q","Let’s review:"));
+  wrong.forEach(function(x){
+   var d=el("div","rev");d.appendChild(el("b","",x.q));
+   d.appendChild(el("span","","Correct answer: "+x.right.map(function(k){return x.opts[k]}).join(", ")));
+   card.appendChild(d);
+  });
+ }
+ var r=el("button","btn","Try again");r.type="button";
+ r.onclick=function(){i=0;score=0;log=[];show()};
+ card.appendChild(r);
+}
+show();
+</script>
+</body>
+</html>
